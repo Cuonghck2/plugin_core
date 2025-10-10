@@ -154,6 +154,13 @@ export default {
                 }
             })
             .then((response) => {
+                console.log("change passs response",response)
+                if (response.data.code == 200) {
+                    alert('Đổi mật khẩu thành công.')
+                    vm.passwordOld = '';
+                    vm.passwordNew = '';
+                    vm.passwordConfirm = '';
+                }
                 vm.changePass = false;
             })
             .catch((error) => {

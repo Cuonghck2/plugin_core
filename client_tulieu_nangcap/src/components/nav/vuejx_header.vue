@@ -139,6 +139,7 @@ export default {
         },
         async doChangePassAction() {
             let vm = this;
+            console.log("doChangePassAction")
             await window.Vue.$axios.post('/security/guest/processAccountPassword', {
                 isChangePass: true,
                 passwordOld: vm.passwordOld,

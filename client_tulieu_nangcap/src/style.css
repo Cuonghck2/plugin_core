@@ -1,0 +1,483 @@
+body .n-input .n-input__border, body .n-input .n-input__state-border {
+    border: none;
+}
+body .n-input {
+    background-color: #edf2f7;
+    min-height: 32px;
+}
+body input {
+    min-height: 32px;
+    padding: 0 8px !important;
+}
+.n-tag.n-tag--closable {
+    padding: 0px 8px 0px 8px !important;
+    height: 26px;
+    border-radius: 4px;
+}
+.n-base-selection .n-base-selection-label .n-base-selection-input {
+    padding-left: 12px;
+}
+.n-base-selection .n-base-selection-tags {
+    padding-left: 4px;
+}
+.n-base-selection.n-base-selection--active .n-base-selection-overlay__wrapper .n-tag {
+    margin-left: 12px !important;
+}
+.n-base-selection .n-base-selection-label,
+.n-base-selection .n-base-selection-tags {
+    background: #edf2f7;
+}
+.n-base-selection .n-base-selection__border, .n-base-selection .n-base-selection__state-border {
+    border: none;
+}
+body .n-input .n-input-wrapper, 
+body .n-input.n-input--textarea .n-input__textarea-el, 
+body .n-input.n-input--textarea .n-input__textarea-mirror, 
+body .n-input.n-input--textarea .n-input__placeholder {
+    
+}
+body .n-date-picker .n-input .n-input-wrapper,
+body .n-date-panel-header .n-input .n-input-wrapper {
+    padding-left: var(--n-padding-left);
+    padding-right: var(--n-padding-right);
+}
+body .select___options {
+    padding: 4px 12px;
+    border-bottom: 1px dashed lightgray;
+    cursor: pointer;
+}
+body .v-vl-visible-items > .select___options:last-child {
+    border-bottom: none !important;
+}
+body .v-vl-visible-items > .select___options:hover {
+    background: #9accff6e;
+    color: #333;
+    font-weight: 700;
+}
+body input[type="text"]:hover, body input[type="number"]:hover, body input[type="password"]:hover {
+    border-color: #36ad6a;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body input[type="text"]:focus, body input[type="number"]:focus, body input[type="password"]:focus {
+    border-color: #36ad6a;
+    box-shadow: 0 0 0 2px rgba(24, 160, 88, 0.2);
+}
+body .n-upload-file-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+body .n-upload-file-list .n-upload-file .n-upload-file-info .n-upload-file-info__action {
+    position: relative;
+    right: unset;
+    top: unset;
+    bottom: unset;
+    width: auto;
+    justify-content: flex-end;
+    opacity: 1;
+    padding: 0;
+    padding-left: 4px;
+}
+body .n-upload-file-list .n-upload-file .n-upload-file-info .n-upload-file-info__thumbnail {
+    display: none;
+}
+body .n-upload-file-list .n-upload-file .n-upload-file-info {
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid #ccc;
+    border-radius: 4px !important;
+    padding-left: 6px;
+    background: #edf2f7;
+}
+body .n-upload .n-upload-file-list .n-upload-file:hover {
+    background-color: transparent;
+}
+body .n-upload-file-list .n-upload-file:hover .n-upload-file-info {
+    background-color: #edf2f7;
+}
+body .n-upload-file-list .n-upload-file .n-upload-file-info .n-upload-file-info__action .n-button:not(:last-child) {
+    margin-right: 0px;
+}
+body .n-upload-file-info__action .n-button:not(.n-button--disabled):hover {
+    background-color: transparent;
+    color: #1B5884;
+}
+body .n-upload-file-info__action .n-button {
+    color: #6669;
+}
+body .n-input .n-input__suffix .n-base-clear .n-base-clear__placeholder .n-base-icon, 
+body .n-input .n-input__prefix .n-base-clear .n-base-clear__placeholder .n-base-icon {
+    color: #333639
+}
+body .n-upload-file-list .n-upload-file.n-upload-file--with-url .n-upload-file-info .n-upload-file-info__name,
+body .n-upload-file-list .n-upload-file.n-upload-file--with-url .n-upload-file-info .n-upload-file-info__name a {
+    color: inherit;
+    text-decoration: none;
+}
+body .n-upload-file-list .n-upload-file:hover .n-upload-file-info .n-upload-file-info__name:hover a {
+    text-decoration: underline;
+    color: #1B5884;
+}
+body .n-upload-file-list .n-upload-file {
+    padding: 0px 12px 0 0px;
+}
+body .n-upload-file-list .n-upload-file.n-upload-file--text-type .n-progress {
+    padding-bottom: 0;
+    margin-bottom: 4px;
+}
+body .n-progress.n-progress--line .n-progress-content {
+    margin-top: 4px;
+}
+body .action___buttons button.hover\:bg-blue-700:hover {
+    border: 1px solid #1a5883;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body .vuejx__table td {
+    border-bottom: 1px solid #e6e6e6!important;
+    border-right: 1px solid #e6e6e6!important;
+}    
+body #body___container {
+    overflow: hidden !important;
+    flex: 1;
+}
+body #body___container > div:first-child {
+    opacity: 0;
+    transition: .5s;
+    transform: translate(0px, -10px);
+}
+body .dynamic__form__vuejx,
+body #body___container .vuejx__table___comp {
+    opacity: 0;
+    transition: .1s;
+    transform: translate(0px, -10px);
+}
+body .dynamic__form__vuejx.done___loading,
+body #body___container.done___loading .vuejx__table___comp.done___loading {
+    opacity: 1;
+    transform: inherit;
+}
+body #body___container.done___loading > div:first-child {
+    opacity: 1;
+    transform: inherit;
+}
+body .dynamic__form__vuejx___wrap {
+    overflow: hidden;
+}
+body .dynamic__form__vuejx___wrap.done___loading {
+    overflow: inherit !important
+}
+body #body___container.done___loading .sm3 .vuejx__chips_filter.done___loading {
+    opacity: 1;
+    transform: inherit;
+    height: inherit;
+}
+body #body___container .sm3 .vuejx__chips_filter {
+    opacity: 0;
+    transition: .5s;
+}
+body .toolbar-search .items-stretch.w-full input {
+    min-height: 30px;
+}
+.hd__screen_nav.mt-2 {
+    border-bottom: 1px solid #cbd5e0;
+}
+body .n-date-picker > .n-input,
+body .n-date-picker .n-input__input > input {
+    min-height: 30px;
+    height: 30px;
+}
+body .n-date-picker .n-input__placeholder {
+    line-height: 30px;
+}
+body .z-50.z-10 {
+    z-index: 10 !important;
+}
+body .loading___table {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    border-left: 1px solid #e6e6e6;
+    line-height: 26px;
+    text-indent: 4px;
+}
+i.mdi.absolute___checked {
+    position: absolute;
+    top: -14px;
+    left: 2px;
+}
+.group:hover .group-hover\:flex {
+    display: flex;
+}
+.rotate-45 {
+    rotate: 45deg;
+}
+body .bg-gray-rangbuoc {
+    background-color: #f8fafc;
+}
+h3.accordion-header {
+    padding: 12px 20px;
+    border-bottom: 1px solid #cbd5e0;
+}
+.accordion-body {
+    font-size: 14px;
+    word-break: break-all;
+}
+body .accordion-body > div {
+    padding: 2px 0;
+}
+body .counter__error {
+    background: #00672b;
+    color: #fff;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+body #body___container > div > div.hd__screen {
+    margin-top: 6px;
+}
+body #app {
+    height: 100vh;
+    background: #f8fafc;
+}
+body .layout__page__screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.dropdown-menu ul.dropdown-menu {
+    z-index: 60 !important;
+    background: #fff;
+}
+body .n-date-picker .n-input .n-input-wrapper {
+    padding-left: 0px;
+    padding-right: 6px;
+}
+.number___view {
+    min-height: inherit!important;
+    height: 34px!important;
+    line-height: 18px;
+}
+.number___view input[type="tel"] {
+    min-height: inherit !important;
+    padding: 0 !important;
+    background: transparent;
+    outline: none !important;
+}
+span.dot___number_precision {
+    margin-left: -2px;
+    font-weight: bold;
+}
+input.number___view_simple {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    top: 0;
+    text-indent: 8px;
+}
+
+.editor___view_scope {
+    max-width: 794px;
+    margin: 0 auto;
+}
+.document-editor {
+    border: 1px solid var(--ck-color-base-border);
+    border-radius: var(--ck-border-radius);
+
+    /* Set vertical boundaries for the document editor. */
+    max-height: 700px;
+
+    /* This element is a flex container for easier rendering. */
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.document-editor__toolbar {
+    /* Make sure the toolbar container is always above the editable. */
+    z-index: 1;
+
+}
+
+/* Adjust the look of the toolbar inside of the container. */
+.document-editor__toolbar .ck-toolbar {
+    border: 0;
+    border-radius: 0;
+}
+
+/* Make the editable container look like the inside of a native word processor app. */
+.document-editor__editable-container {
+    /* Make it possible to scroll the "page" of the edited content. */
+    overflow-y: scroll;
+    padding: 0;
+}
+
+.document-editor__editable-container .document-editor__editable.ck-editor__editable {
+    /* Set the dimensions of the "page". */
+    width: 794px;
+    min-height: 21cm;
+
+    /* Keep the "page" off the boundaries of the container. */
+    padding: 1cm 2cm 2cm;
+
+    border-radius: var(--ck-border-radius);
+    background: white;
+
+    /* Center the "page". */
+    margin: 0 auto;
+}
+
+/* Override the page's width in the "Examples" section which is wider. */
+.main__content-wide .document-editor__editable-container .document-editor__editable.ck-editor__editable {
+    width: 18cm;
+}
+
+/* Set the default font for the "page" of the content. */
+.document-editor .ck-content,
+.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
+    font: 16px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Adjust the headings dropdown to host some larger heading styles. */
+.document-editor .ck-heading-dropdown .ck-list .ck-button__label {
+    line-height: calc( 1.7 * var(--ck-line-height-base) * var(--ck-font-size-base) );
+    min-width: 6em;
+}
+
+/* Scale down all heading previews because they are way too big to be presented in the UI.
+Preserve the relative scale, though. */
+.document-editor .ck-heading-dropdown .ck-list .ck-heading_heading1 .ck-button__label,
+.document-editor .ck-heading-dropdown .ck-list .ck-heading_heading2 .ck-button__label {
+    transform: scale(0.8);
+    transform-origin: left;
+}
+
+/* Set the styles for "Heading 1". */
+.document-editor .ck-content h2,
+.document-editor .ck-heading-dropdown .ck-heading_heading1 .ck-button__label {
+    font-size: 2.18em;
+    font-weight: normal;
+}
+
+.document-editor .ck-content h2 {
+    line-height: 1.37em;
+    padding-top: .342em;
+    margin-bottom: .142em;
+}
+
+/* Set the styles for "Heading 2". */
+.document-editor .ck-content h3,
+.document-editor .ck-heading-dropdown .ck-heading_heading2 .ck-button__label {
+    font-size: 1.75em;
+    font-weight: normal;
+    color: hsl( 203, 100%, 50% );
+}
+
+.document-editor .ck-heading-dropdown .ck-heading_heading2.ck-on .ck-button__label {
+    color: var(--ck-color-list-button-on-text);
+}
+
+/* Set the styles for "Heading 2". */
+.document-editor .ck-content h3 {
+    line-height: 1.86em;
+    padding-top: .171em;
+    margin-bottom: .357em;
+}
+
+/* Set the styles for "Heading 3". */
+.document-editor .ck-content h4,
+.document-editor .ck-heading-dropdown .ck-heading_heading3 .ck-button__label {
+    font-size: 1.31em;
+    font-weight: bold;
+}
+
+.document-editor .ck-content h4 {
+    line-height: 1.24em;
+    padding-top: .286em;
+    margin-bottom: .952em;
+}
+
+/* Make the block quoted text serif with some additional spacing. */
+.document-editor .ck-content blockquote {
+    font-family: Georgia, serif;
+    margin-left: calc( 2 * var(--ck-spacing-large) );
+    margin-right: calc( 2 * var(--ck-spacing-large) );
+}
+
+@media only screen and (max-width: 1200px) {
+    .main__content-wide .document-editor__editable-container .document-editor__editable.ck-editor__editable {
+        width: 100%;
+    }
+}
+
+/* Style document editor a'ka Google Docs.*/
+@media only screen and (min-width: 1360px) {
+    .main .main__content.main__content-wide {
+        padding-right: 0;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .main .main__content.main__content-wide {
+        width: 24cm;
+    }
+
+    .main .main__content.main__content-wide .main__content-inner {
+        width: auto;
+        margin: 0 50px;
+    }
+
+    /* Keep "page" look based on viewport width. */
+    .main__content-wide .document-editor__editable-container .document-editor__editable.ck-editor__editable {
+        width: 60%;
+    }
+}
+body .ck.ck-toolbar {
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+body .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+    box-shadow: none !important;
+    border: none !important;
+}
+.ck-content .todo-list .todo-list__label>input {
+    top: -1px;
+    margin-right: -4px !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-height: 22px !important;
+}
+body .ck-content .todo-list .todo-list__label>input:before {
+    height: 22px !important;
+    width: 22px !important;
+}
+body .ck-content .todo-list .todo-list__label>input:after {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    box-sizing: content-box;
+    content: "";
+    display: block;
+    height: calc(var(--ck-todo-list-checkmark-size)/2.6);
+    left: 15px;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    transform: rotate(45deg);
+    width: calc(var(--ck-todo-list-checkmark-size)/5.3);
+    width: 6px !important;
+    height: 14px !important;
+}
+body .n-date-picker .n-input__placeholder {
+    padding: 0 8px;
+}
+body .checkbox__selected {
+    background: #03672d;
+    border-color: #ffffff;
+    right: 2px;
+    border-width: 4px;
+}

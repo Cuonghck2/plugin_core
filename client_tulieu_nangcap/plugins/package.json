@@ -1,0 +1,28 @@
+{
+  "name": "vite-project",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && rm -rf ../public/ui.umd.js && cp dist/ui.umd.js ../public",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "2.8.4"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "2.2.0",
+    "autoprefixer": "^10.4.7",
+    "axios": "0.26.0",
+    "build": "^0.1.4",
+    "fflate": "^0.7.3",
+    "idb": "^7.0.2",
+    "lodash": "4.17.21",
+    "npm": "^8.19.2",
+    "run": "^1.4.0",
+    "sass": "^1.51.0",
+    "tailwindcss": "^3.0.24",
+    "vue": "3.2.25",
+    "vue3-html2pdf": "^1.1.2",
+    "vue3-simple-html2pdf": "^0.0.6"
+  }
+}

@@ -155,7 +155,7 @@ export default {
             })
             .then((response) => {
                 console.log("change passs response",response)
-                if (response.data.code == 200) {
+                if (response.data.status == 200) {
                     alert('Đổi mật khẩu thành công.')
                     vm.passwordOld = '';
                     vm.passwordNew = '';

@@ -140,8 +140,10 @@ export default {
         async doChangePassAction() {
             let vm = this;
             await window.Vue.$axios.post('/security/guest/processAccountPassword', {
+                isChangePass: true,
+                passwordOld: vm.passwordOld,
                 passwordNew: vm.passwordNew,
-                passwordNewConfirm: vm.passwordConfirm,
+                passwordConfirm: vm.passwordConfirm,
                 token: localStorage.getItem('token')
             }, {
                 headers: {
@@ -211,6 +213,7 @@ export default {
         user: null,
         page: '',
         password: '',
+        passwordOld: '',
         passwordNew: '',
         passwordConfirm: '',
         changePass: false,
@@ -288,12 +291,26 @@ export default {
                             class="text-lg leading-6 font-semibold text-gray-900"
                             id="modal-headline"
                             >
-                            Đổi mât khẩu
+                            Đổi mật khẩu
                             </h3>
                         </div>
                         </div>
                     </div>
                     <div class="p-4">
+                        <div>
+                        <div class="block font-semibold leading-normal truncate">
+                            Mật khẩu cũ
+                            <span
+                            class="required__class"
+                            >*</span>
+                        </div>
+                        <input
+                            v-model="passwordOld"
+                            class="p-2 focus:outline-none focus:cursor-text w-full border border-gray-200 bg-gray-200 text-gray-700 focus:outline-none focus:bg-white focus:border-gray-400 rounded"
+                            type="password"
+                            placeholder="Mật khẩu cũ"
+                        />
+                        </div>
                         <div>
                         <div class="block font-semibold leading-normal truncate">
                             Mật khẩu mới

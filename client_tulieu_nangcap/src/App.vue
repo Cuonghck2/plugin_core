@@ -52,7 +52,6 @@
     injectWat.value = true
     appversion.value = localStorage.getItem('appversion');
     visibility.value = route.params.visibility
-    console.log('preparePagepreparePagepreparePage', visibility.value, route.params, window.Vue.router.currentRoute.value.params);
     renderPageLoad.value = false
     site.value = route.params.site
     let sitePage = site.value;

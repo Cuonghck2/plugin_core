@@ -10,7 +10,34 @@
     methods: {
 			changeData() {
         console.log('changeDatachangeDatachangeDatachangeDatachangeDatachangeDatachangeData');
-			}
+			},
+      isValidEmail(val) {
+      // Loại bỏ khoảng trắng 2 đầu và kiểm tra định dạng cơ bản
+      const v = String(val || '').trim();
+      // Regex đơn giản, đủ dùng cho hầu hết trường hợp
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      return re.test(v);
+    },
+    isValidPhone(val) {
+      // Chuẩn hóa số: loại bỏ khoảng trắng, dấu gạch
+      const v = String(val || '').replace(/[\s\-\.]/g, '');
+      // Chấp nhận dạng Việt Nam: 0xxxxxxxxx hoặc +84xxxxxxxxx (9–10 số sau prefix)
+      // - 0 + 9–10 chữ số
+      // - +84 + 9–10 chữ số
+      const re0 = /^0\d{9,10}$/;
+      const re84 = /^\+?84\d{9,10}$/;
+      return re0.test(v) || re84.test(v);
+    },
+    normalizeOnInput(e) {
+      // Chỉ chạy khi cấu hình modPhone bật
+      if (!this.item?.modPhone) return;
+      let v = e?.target?.value ?? '';
+      const hasPlus = v.startsWith('+');
+      v = v.replace(/[^\d]/g, '');
+      e.target.value = hasPlus ? `+${v}` : v;
+      // Đồng bộ lại vào dataForm
+      this.$set(this.dataForm, this.item.model, e.target.value);
+    },
     }
   }
 </script>
@@ -34,5 +61,11 @@
       @input="changeData"
       />
       <div v-if="item['required'] && !dataForm[item.model]" v-show="afterSubmit" class="text-red-600 mt-2 italic error___form"> {{ item.required_title ? item.required_title : 'Trường dữ liệu bắt buộc' }}</div>
+      <div v-if="item?.modMail && dataForm[item.model] && !isValidEmail(String(dataForm[item.model]))" v-show="afterSubmit" class="text-red-600 mt-2 italic error___form">
+        {{ item.invalid_mail_title ? item.invalid_mail_title : 'Email không hợp lệ' }}
+      </div>
+      <div v-if="item?.modPhone && dataForm[item.model] && !isValidPhone(String(dataForm[item.model]))" v-show="afterSubmit" class="text-red-600 mt-2 italic error___form">
+        {{ item.invalid_phone_title ? item.invalid_phone_title : 'Số điện thoại không hợp lệ' }}
+      </div>
   </label>
 </template>

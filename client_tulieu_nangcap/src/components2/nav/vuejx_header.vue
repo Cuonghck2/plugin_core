@@ -98,10 +98,15 @@ export default {
                 if (objectData.openAccess == '0' && this.user && Array.isArray(objectData.accessRoles) && objectData.accessRoles.length > 0) {
                     let result = false;
                     let notFount = false;
+                    let adminDenied = false;
                     for (const el of objectData.accessRoles) {
+                        const isAdminRole = el.shortName === 'admin' || el.shortName==='AdminData'
                         if (Array.isArray(this.user.role) && this.user.role.length > 0 && this.user.role.indexOf(el.shortName) != -1) {
                             notFount = false;
                             if (el.permission == '5') {
+                                if(!adminDenied && isAdminRole) {
+                                    adminDenied = true;
+                                }
                                 result = false;
                                 break;
                             } else {
@@ -115,7 +120,7 @@ export default {
                     if (notFount) {
                         itemxxxx[keyObj]['perView'] = true;
                     } else {
-                        itemxxxx[keyObj]['perView'] = result;
+                        itemxxxx[keyObj]['perView'] = isAdmin ? !adminDenied : result;
                     }
                 } else {
                     itemxxxx[keyObj]['perView'] = true;
@@ -224,9 +229,9 @@ export default {
                                     <button aria-label="btn" class="label" @click.stop="toPage(Object.values(item)[0])"> {{ Object.values(item)[0].title }} <i v-if="Object.values(item)[0].sub___pages && Object.values(item)[0].sub___pages.length > 0" class="mdi mdi-chevron-double-down" style="margin-top: -2px;"></i> </button>
                                     <div class="dropdown" v-if="Object.values(item)[0].sub___pages && Object.values(item)[0].sub___pages.length > 0"> <div v-for="(sub, indexSub) in Object.values(item)[0].sub___pages" v-bind:key="indexSub"> <button aria-label="btn" class="dropdown-child" @click.stop="toPage(sub['_source'])"> {{ sub._source?.title }} </button> </div> </div>
                                 </div>
-                                
+
                             </template>
-                            
+
                         </div>
                     </slot>
                     <slot name="header_login">

@@ -33,6 +33,8 @@ const clearData = (type) => {
 
 const changeDataCbx = (data) => {
   if (data.model == 'TinhThanh') {
+    props.dataForm[props.item.model + '.QuanHuyen._id'] = null;
+    props.dataForm[props.item.model + '.QuanHuyen'] = null;
     props.dataForm[props.item.model + '.PhuongXa._id'] = null;
     props.dataForm[props.item.model + '.PhuongXa'] = null;
     renderXa.value = false
@@ -40,13 +42,19 @@ const changeDataCbx = (data) => {
       props.dataForm[props.item.model + '.TinhThanh._id'] = null;
       props.dataForm[props.item.model + '.TinhThanh'] = null;
       window.Vue.set(props.dataForm[props.item.model], 'TinhThanh', null)
-      window.Vue.set(props.dataForm[props.item.model], 'TinhThanh', null)
-      window.Vue.set(props.dataForm[props.item.model], 'TinhThanh', null)
-      window.Vue.set(props.dataForm[props.item.model], 'PhuongXa', null)
-      window.Vue.set(props.dataForm[props.item.model], 'PhuongXa', null)
+      window.Vue.set(props.dataForm[props.item.model], 'QuanHuyen', null)
       window.Vue.set(props.dataForm[props.item.model], 'PhuongXa', null)
     }
-  }
+  } else if (data.model == 'QuanHuyen') {
+      renderXa.value = false;
+      if (!data.data) {
+        props.dataForm[props.item.model + '.QuanHuyen._id'] = null;
+        window.Vue.set(props.dataForm[props.item.model], 'QuanHuyen', null)
+        window.Vue.set(props.dataForm[props.item.model], 'PhuongXa', null)
+      }
+      props.dataForm[props.item.model + '.PhuongXa._id'] = null;
+      props.dataForm[props.item.model + '.PhuongXa'] = null;
+    }
   setTimeout(() => {
     renderXa.value = true
   }, 200);
@@ -153,10 +161,77 @@ const conditionXa = computed(() => {
 <template>
   <div v-if="item" :class="'vuejx_comp___' + item['model']">
     <template v-if="item.label_tinh">
-      <div class="flex flex-wrap -mx-2">
+      <div v-if="dataForm[item.model + '.QuanHuyen']" class="flex flex-wrap -mx-2">
+        <div class="xs12 sm4 px-2">
+          <vuejx-autocomplete-wrap :key="dataForm[item.model + '.TinhThanh']"  @changeData="changeDataCbx"
+            :item='{
+              modelRoot: item.model, modelView: "object", 
+              label: item["placeholder_tinh"],
+              placeholder: item["placeholder_tinh"],
+              model: "TinhThanh",
+              type: "autocomplete",
+              label_class: item["css_tinh"], multiple: false, chips: false, required: item.hasOwnProperty("required_tinh") ? item["required_tinh"] : item["required"],
+              collection: "C_TinhThanh",
+              label: item["label_tinh"]
+            }' :dataForm="dataForm[item.model]" v-model="dataForm[item.model + '.TinhThanh']"
+          ></vuejx-autocomplete-wrap>
+          <div v-if="item['required'] && !dataForm[item.model + '.TinhThanh']" class="text-red-600 mt-2 italic error___form"> {{ item.required_title ? item.required_title : 'Trường dữ liệu bắt buộc' }}</div>
+        </div>
+        <div class="xs12 sm4 px-2">
+          <vuejx-autocomplete-wrap :key="dataForm[item.model + '.TinhThanh._id']" @changeData="changeDataCbx"
+            :item='{
+              modelRoot: item.model, modelView: "object", 
+              label: item["placeholder_huyen"],
+              placeholder: item["placeholder_huyen"],
+              model: "QuanHuyen",
+              type: "autocomplete",
+              label_class: item["css_huyen"], multiple: false, chips: false, required: item.hasOwnProperty("required_huyen") ? item["required_huyen"] : item["required"],
+              collection: "C_QuanHuyen",
+              condition: [{
+                bool: {
+                  should: [
+                    { 
+                      match: {
+                        "TinhThanh._source.MaMuc": objectView(dataForm[item.model + ".TinhThanh"], "_source.MaMuc")
+                      }
+                    }
+                  ]
+                }
+              }],
+              label: item["label_huyen"]
+            }' :dataForm="dataForm[item.model]" v-model="dataForm[item.model + '.QuanHuyen']"
+          ></vuejx-autocomplete-wrap>
+          <div v-if="item['required'] && !dataForm[item.model + '.TinhThanh']" class="text-red-600 mt-2 italic error___form"> {{ item.required_title ? item.required_title : 'Trường dữ liệu bắt buộc' }}</div>
+        </div>
+        <div class="xs12 sm4 px-2">
+          <vuejx-autocomplete-wrap :key="renderXa" @changeData="changeDataCbx"
+            :item='{
+              modelRoot: item.model, modelView: "object", 
+              label: item["placeholder_xa"],
+              placeholder: item["placeholder_xa"],
+              model: "PhuongXa", type: "autocomplete",
+              label_class: item["css_xa"], multiple: false, chips: false, required: item.hasOwnProperty("required_xa") ? item["required_xa"] : false,
+              collection: "C_PhuongXa",
+              condition: [{
+                bool: {
+                  should: [
+                    { 
+                      match: {
+                        "QuanHuyen._source.MaMuc": objectView(dataForm[item.model + ".QuanHuyen"], "_source.MaMuc")
+                      }
+                    }
+                  ]
+                }
+              }],
+              label: item["label_xa"]
+            }' :dataForm="dataForm[item.model]" v-model="dataForm[item.model + '.PhuongXa']"
+          ></vuejx-autocomplete-wrap>
+        </div>
+      </div>
+      <div v-else class="flex flex-wrap -mx-2">
         <div class="xs12 sm6 px-2">
           <vuejx-autocomplete-wrap :key="dataForm[item.model + '.TinhThanh']" @changeData="changeDataCbx" :item='{
-            column: ["MaMuc", "TenMuc", "type", "TinhThanh"],
+            column: ["MaMuc", "TenMuc", "type", "TinhThanhHopNhat"],
             modelRoot: item.model, modelView: "object",
             label: item["placeholder_tinh"],
             placeholder: item["placeholder_tinh"],
@@ -174,7 +249,7 @@ const conditionXa = computed(() => {
         </div>
         <div class="xs12 sm6 px-2">
           <vuejx-autocomplete-wrap :key="renderXa" @changeData="changeDataCbx" :item='{
-            column: ["MaMuc", "TenMuc", "type", "TinhThanh"],
+            column: ["MaMuc", "TenMuc", "type", "PhuongXaHopNhat"],
             modelRoot: item.model, modelView: "object",
             label: item["placeholder_xa"],
             placeholder: item["placeholder_xa"],

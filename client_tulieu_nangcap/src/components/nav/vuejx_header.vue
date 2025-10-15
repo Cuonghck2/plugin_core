@@ -30,28 +30,13 @@ export default {
         toLogin () {
             window.location.href = "/#/login";
         },
-        doChangePass() {
-            const current = window.Vue.router.currentRoute.value;
-            let toGPage = "/#/" + current.params.visibility + "/" + localStorage.getItem("site") + "/" + this.ssoLogin
-            window.open(toGPage, "_blank");
-        },
         async toGroupPage (type) {
             let document = await window.db.get(type + 'Nav')
             if (document && Array.isArray(document.page) && document.page.length > 0) {
-                const toGPage = "/#/" + type + "/" + window.Vue.router.currentRoute.value.params.site + '/' + Object.values(document.page[0])[0]['shortName'];
-                if (localStorage.getItem('menu_blank')) {
-                    window.open(toGPage, "_blank");
-                } else {
-                    window.location.href = toGPage
-                }
-                //window.location.href = "/#/" + type + "/" + window.Vue.router.currentRoute.value.params.site + '/dashboard_group'
+                //window.location.href = "/#/" + type + "/" + window.Vue.router.currentRoute.value.params.site + '/' + Object.values(document.page[0])[0]['shortName'];
+                window.location.href = "/#/" + type + "/" + window.Vue.router.currentRoute.value.params.site + '/dashboard_group'
             } else {
-                const toGPage = "/#/" + type + "/" + window.Vue.router.currentRoute.value.params.site;
-                if (localStorage.getItem('menu_blank')) {
-                    window.open(toGPage, "_blank");
-                } else {
-                    window.location.href = toGPage
-                }
+                window.location.href = "/#/" + type + "/" + window.Vue.router.currentRoute.value.params.site;
             }
         },
         async pullNewPages(nav) {
@@ -92,7 +77,7 @@ export default {
                     let result = false;
                     for (const el of objectData.accessRoles) {
                         if (Array.isArray(this.user.role) && this.user.role.length > 0 && this.user.role.indexOf(el.shortName) != -1) {
-                            if (el.permission == '5') {
+                            if (el.permission == '4') {
                                 result = false;
                                 break;
                             } else {
@@ -113,10 +98,17 @@ export default {
                 if (objectData.openAccess == '0' && this.user && Array.isArray(objectData.accessRoles) && objectData.accessRoles.length > 0) {
                     let result = false;
                     let notFount = false;
+                    let adminDenied = false;
                     for (const el of objectData.accessRoles) {
+                        const isAdminRole = el.shortName === 'admin' || el.shortName==='AdminData'
+                        console.log('tuantm isAdmin, shortName, isAdminRole', isAdmin, el.shortName, isAdminRole)
                         if (Array.isArray(this.user.role) && this.user.role.length > 0 && this.user.role.indexOf(el.shortName) != -1) {
                             notFount = false;
                             if (el.permission == '5') {
+                                if(!adminDenied && isAdminRole) {
+                                    console.log('tuantm isAdminRole switch to true')
+                                    adminDenied = true;
+                                }
                                 result = false;
                                 break;
                             } else {
@@ -127,10 +119,11 @@ export default {
                             notFount = true;
                         }
                     }
+                    console.log('tuantm adminDenied, perView', adminDenied, isAdmin ? !adminDenied : result)
                     if (notFount) {
                         itemxxxx[keyObj]['perView'] = true;
                     } else {
-                        itemxxxx[keyObj]['perView'] = result;
+                        itemxxxx[keyObj]['perView'] = isAdmin ? !adminDenied : result;
                     }
                 } else {
                     itemxxxx[keyObj]['perView'] = true;
@@ -139,12 +132,9 @@ export default {
         },
         async doChangePassAction() {
             let vm = this;
-            console.log("doChangePassAction")
-            await window.Vue.$axios.post('/security/guest/processAccountPassword', {
-                isChangePass: true,
-                passwordOld: vm.passwordOld,
+            await window.Vue.$axios.post('/admin/security/guest/processAccountPassword', {
                 passwordNew: vm.passwordNew,
-                passwordConfirm: vm.passwordConfirm,
+                passwordNewConfirm: vm.passwordConfirm,
                 token: localStorage.getItem('token')
             }, {
                 headers: {
@@ -154,13 +144,6 @@ export default {
                 }
             })
             .then((response) => {
-                console.log("change passs response",response)
-                if (response.data.status == 200) {
-                    alert('Đổi mật khẩu thành công.')
-                    vm.passwordOld = '';
-                    vm.passwordNew = '';
-                    vm.passwordConfirm = '';
-                }
                 vm.changePass = false;
             })
             .catch((error) => {
@@ -221,12 +204,10 @@ export default {
         user: null,
         page: '',
         password: '',
-        passwordOld: '',
         passwordNew: '',
         passwordConfirm: '',
         changePass: false,
-        defaultNav: true,
-        ssoLogin: localStorage.getItem('SSO_LOGIN')
+        defaultNav: true
     }),
 }
 </script>
@@ -248,12 +229,12 @@ export default {
                                 <div v-bind:key="index" class="item" tabindex="0" :class="{ active: page ? page.startsWith(Object.values(item)[0].shortName) || String(Object.values(item)[0].activePage).indexOf(page + ',') !== -1 : false, 'mr-2': Object.values(item)[0].sub___pages && Object.values(item)[0].sub___pages.length > 0 }"
                                     v-if="item && Object.values(item) && Object.values(item)[0] && Object.values(item)[0].perView"
                                 >
-                                    <button aria-label="btn" class="label" :class="Object.values(item)[0].shortName" @click.stop="toPage(Object.values(item)[0])"> {{ Object.values(item)[0].title }} <i v-if="Object.values(item)[0].sub___pages && Object.values(item)[0].sub___pages.length > 0" class="mdi mdi-chevron-double-down" style="margin-top: -2px;"></i> </button>
+                                    <button aria-label="btn" class="label" @click.stop="toPage(Object.values(item)[0])"> {{ Object.values(item)[0].title }} <i v-if="Object.values(item)[0].sub___pages && Object.values(item)[0].sub___pages.length > 0" class="mdi mdi-chevron-double-down" style="margin-top: -2px;"></i> </button>
                                     <div class="dropdown" v-if="Object.values(item)[0].sub___pages && Object.values(item)[0].sub___pages.length > 0"> <div v-for="(sub, indexSub) in Object.values(item)[0].sub___pages" v-bind:key="indexSub"> <button aria-label="btn" class="dropdown-child" @click.stop="toPage(sub['_source'])"> {{ sub._source?.title }} </button> </div> </div>
                                 </div>
-                                
+
                             </template>
-                            
+
                         </div>
                     </slot>
                     <slot name="header_login">
@@ -266,8 +247,7 @@ export default {
                                     <div> <div class="divider"></div> </div>
                                     <div @click="toGroupPage('group')"> <button aria-label="btn" class="dropdown-child">Trang quản trị</button> </div>
                                     <div> <div class="divider"></div> </div>
-                                    <div v-if="ssoLogin" @click="doChangePass"> <button aria-label="btn" class="dropdown-child">Đổi mật khẩu</button> </div>
-                                    <div v-else @click="changePass = !changePass"> <button aria-label="btn" class="dropdown-child">Đổi mật khẩu</button> </div>
+                                    <div @click="changePass = !changePass"> <button aria-label="btn" class="dropdown-child">Đổi mật khẩu</button> </div>
                                     <div> <div class="divider"></div> </div>
                                     <div @click="doLogout"> <button aria-label="btn" class="dropdown-child">Đăng xuất</button> </div>
                                 </div>
@@ -299,26 +279,12 @@ export default {
                             class="text-lg leading-6 font-semibold text-gray-900"
                             id="modal-headline"
                             >
-                            Đổi mật khẩu
+                            Đổi mât khẩu
                             </h3>
                         </div>
                         </div>
                     </div>
                     <div class="p-4">
-                        <div>
-                        <div class="block font-semibold leading-normal truncate">
-                            Mật khẩu cũ
-                            <span
-                            class="required__class"
-                            >*</span>
-                        </div>
-                        <input
-                            v-model="passwordOld"
-                            class="p-2 focus:outline-none focus:cursor-text w-full border border-gray-200 bg-gray-200 text-gray-700 focus:outline-none focus:bg-white focus:border-gray-400 rounded"
-                            type="password"
-                            placeholder="Mật khẩu cũ"
-                        />
-                        </div>
                         <div>
                         <div class="block font-semibold leading-normal truncate">
                             Mật khẩu mới

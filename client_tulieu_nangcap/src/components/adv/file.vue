@@ -130,6 +130,7 @@
           uploadHeaders['headers']["metadata"] = encodeURIComponent(
               JSON.stringify(vm.metadata)
           );
+          console.log("finalUrl", vm.uploadUrl.replace("security", "security/file"))
           await window.Vue.$axios.post(vm.uploadUrl.replace("security", "security/file"), data, uploadHeaders).then(function(response) {
               if (response) {
                   if (vm.multiple) {
@@ -187,6 +188,7 @@
               uploadHeaders['headers']["metadata"] = encodeURIComponent(
                   JSON.stringify(vm.metadata)
               );
+              console.log("finalUrl",API.security + vm.uploadUrl.replace("security", "security/file"))
               await window.Vue.$axios.post(API.security + vm.uploadUrl.replace("security", "security/file"), data, uploadHeaders).then(function(response) {
                   if (response) {
                       if (vm.multiple) {
